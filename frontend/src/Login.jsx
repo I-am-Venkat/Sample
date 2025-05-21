@@ -1,29 +1,38 @@
 import React from 'react'
 import { use } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Register from './Register';
 const Login = () => {
 
     const navigate=useNavigate();
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        const data=new FormData(e.target);
-        const username=data.get('username');
-        // const mobilenumber=data.get('mobilenumber');
-        const password=data.get('password');
-        if(password.length<8){
-            alert("Password should be of length 8")
-        }
-        if(username=="admin" && password==="Admin@123"){
-            alert("Login Successfull")
-            navigate("/Home")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const mobilenumber = data.get('mobilenumber');
+    const password = data.get('password');
 
-        }
-        else{
-            alert("Invalid Credentials");
-            
-        }
+    if (password.length < 8) {
+        alert("Password should be at least 8 characters");
+        return;
     }
+
+    try {
+        const response = await axios.post("http://localhost:5000/Login", {
+            mobilenumber,password
+        });
+
+        if (response.data.success) {
+            alert("Login Successful");
+            navigate("/Home");
+        } else {
+            alert(`Login failed: ${result.error || "Invalid credentials"}`);
+        }
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
+};
+
     return (
         <div>
             <h1> Login</h1>
@@ -38,12 +47,12 @@ const Login = () => {
                 <input
                     style={{ height: '35px', width: '300px' }}
                     type="text"
-                    name="username"
+                    name="mobilenumber"
                     // onChange={handleChange}
-                    placeholder='Enter Username'
+                    placeholder='Enter mobilenumber'
                     required
-                    // minLength={10}
-                    // maxLength={10}
+                    minLength={10}
+                    maxLength={10}
                 />
 
                 <input

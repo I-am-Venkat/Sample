@@ -4,6 +4,7 @@ import db from  './src/config/db.js'
 import cors from 'cors'
 dotenv.config();
 import addUser from './src/controller/addUser.js'
+import validateUser from './src/controller/validateUser.js'
 
 const app = express();
 // Connect to MongoDB
@@ -21,6 +22,7 @@ app.use(express.json());
 
 
 app.post("/Register",addUser);
+app.post("/Login",validateUser);
 
 
 const PORT = process.env.PORT || 3000;
