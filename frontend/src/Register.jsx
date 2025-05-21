@@ -2,6 +2,7 @@ import React from 'react'
 import { use } from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import Login from './Login';
+import "animate.css"
 const Register = () => {
 
 
@@ -54,9 +55,9 @@ const Register = () => {
             <h1> Register</h1>
 
 
-            <form onSubmit={handleSubmit} className="div"
+            <form onSubmit={handleSubmit} className="animate__animated animate__fadeIn" 
             
-                style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '70px', gap: '10px',border:'3px solid white' }}>
+                style={{ animationDelay:'2s',animationDuration:'2s',display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '70px', gap: '10px',border:'3px solid white' }}>
                 <input
                     style={{ height: '35px', width: '300px' }}
                     type="text"
